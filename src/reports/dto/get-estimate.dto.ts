@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsString,
   IsNumber,
@@ -14,11 +15,13 @@ export class GetEstimateDto {
   @IsString()
   model: string;
 
+  @Transform(({value}) => parseInt(value))
   @IsNumber()
   @Min(1930)
-  @Max(2050)
+  @Max(2051)
   year: number;
 
+  @Transform(({value}) => parseInt(value))
   @IsNumber()
   @Min(0)
   @Max(1000000)
@@ -29,4 +32,6 @@ export class GetEstimateDto {
 
   @IsLatitude()
   lat: number;
+
+
 }
