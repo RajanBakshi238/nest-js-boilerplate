@@ -20,8 +20,9 @@ import { DatabaseOptionsService } from './database/services/database.options.ser
       connectionName: DATABASE_CONNECTION_NAME,
       imports: [DatabaseOptionsModule],
       inject: [DatabaseOptionsService],
-      useFactory: (databaseOptionsService: DatabaseOptionsService) =>
-        databaseOptionsService.createOptions(),
+      useFactory: async (databaseOptionsService: DatabaseOptionsService) => {
+        return databaseOptionsService.createOptions();
+      },
     }),
   ],
 })
