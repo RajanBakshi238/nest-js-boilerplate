@@ -23,8 +23,8 @@ export class AuthService {
     try {
       await user.save();
     } catch (error) {
-      console.error(error, 'error occured');
-      if (error.code === '23505') {
+    //   console.error(error, 'error occured', Object.keys(error), error.code);
+      if (error.code === 11000) {
         throw new ConflictException('Email Already exists.');
       } else {
         throw new InternalServerErrorException();
