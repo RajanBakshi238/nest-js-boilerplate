@@ -6,6 +6,7 @@ import { DATABASE_CONNECTION_NAME } from './database/constants/database.constant
 import configs from 'src/configs';
 import { DatabaseOptionsModule } from './database/database.options.module';
 import { DatabaseOptionsService } from './database/services/database.options.service';
+import { AuthModule } from 'src/modules/auth/auth.module';
 
 @Module({
   controllers: [],
@@ -16,14 +17,20 @@ import { DatabaseOptionsService } from './database/services/database.options.ser
       isGlobal: true,
       envFilePath: ['.env'],
     }),
-    MongooseModule.forRootAsync({
-      connectionName: DATABASE_CONNECTION_NAME,
-      imports: [DatabaseOptionsModule],
-      inject: [DatabaseOptionsService],
-      useFactory: async (databaseOptionsService: DatabaseOptionsService) => {
-        return databaseOptionsService.createOptions();
-      },
-    }),
+
+    // FIXME : commented as internals are not clear to me.
+
+    // MongooseModule.forRootAsync({              
+    //   connectionName: DATABASE_CONNECTION_NAME,
+    //   imports: [DatabaseOptionsModule],
+    //   inject: [DatabaseOptionsService],
+    //   useFactory: async (databaseOptionsService: DatabaseOptionsService) => {
+    //     return databaseOptionsService.createOptions();
+    //   },
+    // }),
+
+    MongooseModule.forRoot(process.env.DATABASE),
+    AuthModule
   ],
 })
 export class CommonModule {}
