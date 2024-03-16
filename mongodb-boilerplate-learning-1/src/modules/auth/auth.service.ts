@@ -12,7 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from './schemas/user.schema';
 import { AuthCredentialDto } from './dto/auth-credential.dto';
 import { SignInCredentialDto } from './dto/signin-credential.dto';
-import { JWTPayload } from './models/jwt-payload.interface';
+import { JWTPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
